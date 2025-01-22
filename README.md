@@ -53,7 +53,7 @@ uvicorn app.main:app --reload
 В ней указаны закрытые проекты, отсортированные по скорости сбора средств 
 — от тех, что закрылись быстрее всего, до тех, что долго собирали нужную сумму.
 
-![alt text](https://pictures.s3.yandex.net/resources/S01_186_1653890218.png)
+![alt text](https://pictures.s3.yandex.net/resources/image_1716186851.png)
 
 Добавте  ключи, в файле .env:
 
