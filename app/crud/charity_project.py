@@ -1,8 +1,9 @@
 from typing import Optional
 
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
+from sqlalchemy import func, select
 
+from app.core.config import Constant
 from app.crud.base import CRUDBaseAdvanced
 from app.models.charity_project import CharityProject
 
@@ -23,11 +24,17 @@ class CRUDCharityProject(CRUDBaseAdvanced):
     ) -> list[list]:
         """Получение списка проектов."""
         project_objs = await session.execute(
-            select(CharityProject).where(CharityProject
-                                         .close_date.isnot(None))
+            select(CharityProject).where(
+                CharityProject.close_date.isnot(None)
+            ).order_by(
+                func.coalesce(
+                    CharityProject.close_date - CharityProject.create_date,
+                    Constant.RETURNED_NULL
+                )
+            )
         )
         project_objs = project_objs.scalars().all()
-        project_list = [
+        return [
             [
                 project.name,
                 str(project.close_date - project.create_date),
@@ -35,7 +42,6 @@ class CRUDCharityProject(CRUDBaseAdvanced):
             ]
             for project in project_objs
         ]
-        return sorted(project_list, key=lambda x: x[1])
 
 
 charity_project_crud = CRUDCharityProject(CharityProject)

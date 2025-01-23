@@ -51,7 +51,7 @@ async def set_user_permissions(
         service.permissions.create(
             fileId=spreadsheetid,
             json=permissions_body,
-            fields="id"
+            fields='id'
         ))
 
 
@@ -69,7 +69,7 @@ async def spreadsheets_update_value(
 
     table_values = [
         [cell.format(
-            date=now_date_time) if "{date}" in cell else cell for cell in row]
+            date=now_date_time) if '{date}' in cell else cell for cell in row]
         for row in Constant.TABLE_TEMPLATE
     ] + [
         [str(project[0]), str(project[1]), str(project[2])]
@@ -77,8 +77,8 @@ async def spreadsheets_update_value(
     ]
 
     update_body = {
-        "majorDimension": Constant.MAJOR_DIMENSION_ROWS,
-        "values": table_values
+        'majorDimension': Constant.MAJOR_DIMENSION_ROWS,
+        'values': table_values
     }
 
     await wrapper_services.as_service_account(

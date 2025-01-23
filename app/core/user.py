@@ -16,7 +16,7 @@ from fastapi_users.authentication import (
 from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.core.config import settings
+from app.core.config import settings, Constant
 from app.core.db import get_async_session
 from app.models.user import User
 from app.schemas.user import UserCreate
@@ -41,7 +41,10 @@ def get_jwt_strategy() -> JWTStrategy:
 
     Стратегия JWT с заданными секретом и временем жизни.
     """
-    return JWTStrategy(secret=settings.secret, lifetime_seconds=3600)
+    return JWTStrategy(
+        secret=settings.secret,
+        lifetime_seconds=Constant.TOKEN_EXPIRATION_DATE
+    )
 
 
 auth_backend = AuthenticationBackend(
@@ -64,7 +67,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
         user: Union[UserCreate, User],
     ) -> None:
         """Проверяет, что пароль соответствует требованиям."""
-        if len(password) < 3:
+        if len(password) < Constant.MIN_PASSWORD_LENGTH:
             raise InvalidPasswordException(
                 reason='Минимум три символа'
             )

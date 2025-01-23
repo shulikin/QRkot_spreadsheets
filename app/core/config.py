@@ -16,9 +16,9 @@ class Constant:
     NAME_MAX_LEN = 100
     NAME_MIN_LEN = 1
     BASE_DIR = Path(__file__).parent
-    LOG_FORMAT = '"%(asctime)s - [%(levelname)s] - %(message)s"'
+    LOG_FORMAT = '%(asctime)s - [%(levelname)s] - %(message)s'
     DATETIME_FORMAT = '%d.%m.%Y %H:%M:%S'
-    VALUE_INPUT_OPTION_USER_ENTERED = "USER_ENTERED"
+    VALUE_INPUT_OPTION_USER_ENTERED = 'USER_ENTERED'
     SHEET_ID = 0
     DRIVE_API_NAME = 'drive'
     DRIVE_API_VERSION = 'v3'
@@ -29,16 +29,20 @@ class Constant:
     SHEETS_API_NAME = 'sheets'
     SHEETS_API_VERSION = 'v4'
     SHEET_GRID_PROPERTIES = {'rowCount': 100, 'columnCount': 11}
-    SPREADSHEET_RANGE = "A1:D100"
+    SPREADSHEET_RANGE = 'A1:D100'
     PERMISSION_ROLE = 'writer'
     PERMISSION_TYPE = 'user'
-    MAJOR_DIMENSION_ROWS = "ROWS"
+    MAJOR_DIMENSION_ROWS = 'ROWS'
+    TOKEN_EXPIRATION_DATE = 3600
+    MIN_PASSWORD_LENGTH = 3
+    DOCS_GOOGL_URL = 'https://docs.google.com/spreadsheets/d/'
+    RETURNED_NULL = 0
 
     # Шаблон таблицы
     TABLE_TEMPLATE = [
-        ["Отчет", "{date}"],
-        ["Топ проектов"],
-        ["Название проекта", "Время сбора", "Описание"],
+        ['Отчет', '{date}'],
+        ['Топ проектов'],
+        ['Название проекта', 'Время сбора', 'Описание'],
     ]
 
 

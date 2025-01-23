@@ -2,6 +2,7 @@ from aiogoogle import Aiogoogle
 from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from app.core.config import Constant
 from app.core.db import get_async_session
 from app.core.google_client import get_service
 from app.core.user import current_superuser
@@ -34,6 +35,4 @@ async def get_report(
         spreadsheet_id, project_list, wrapper_services
     )
 
-    return {
-        "report": f"https://docs.google.com/spreadsheets/d/{spreadsheet_id}"
-    }
+    return {'report': Constant.DOCS_GOOGL_URL + spreadsheet_id}
